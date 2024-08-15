@@ -5,7 +5,7 @@ const Home = () => {
   const [newTask, setNewTask] = useState('');
 
   // Función para agregar una nueva tarea cuando el usuario presiona "Enter"
-  const handleAddTask = (e) => {
+  const addTask = (e) => {
     if (e.key === 'Enter' && newTask.trim() !== '') {
       setTasks([...tasks, newTask]);
       setNewTask(''); // Limpiar el input después de agregar la tarea
@@ -13,7 +13,7 @@ const Home = () => {
   };
 
   // Función para eliminar una tarea
-  const handleDeleteTask = (indexToDelete) => {
+  const deleteTask = (indexToDelete) => {
     setTasks(tasks.filter((_, index) => index !== indexToDelete));
   };
 
@@ -29,7 +29,7 @@ const Home = () => {
             placeholder="What needs to be done?"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
-            onKeyDown={handleAddTask} // Agregar tarea al presionar Enter
+            onKeyDown={addTask} // Agregar tarea al presionar Enter
           />
           <ul className="list-group">
             {tasks.length === 0 ? (
@@ -45,7 +45,7 @@ const Home = () => {
                   {task}
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => handleDeleteTask(index)}
+                    onClick={() => deleteTask(index)}
                   >
                     Delete
                   </button>
