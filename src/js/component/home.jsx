@@ -1,26 +1,66 @@
-import React from "react";
+import React, { useState } from 'react';
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
+
+  // Función para agregar una nueva tarea cuando el usuario presiona "Enter"
+  const handleAddTask = (e) => {
+    if (e.key === 'Enter' && newTask.trim() !== '') {
+      setTasks([...tasks, newTask]);
+      setNewTask(''); // Limpiar el input después de agregar la tarea
+    }
+  };
+
+  // Función para eliminar una tarea
+  const handleDeleteTask = (indexToDelete) => {
+    setTasks(tasks.filter((_, index) => index !== indexToDelete));
+  };
+
+  return (
+	
+    <div className="container d-flex justify-content-center">
+     	<div className="card w-50 mt-5">
+        <div className="card-body">
+          <h1 className="text-center text-muted mb-4">todos</h1>
+          <input
+            type="text"
+            className="form-control mb-3"
+            placeholder="What needs to be done?"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            onKeyDown={handleAddTask} // Agregar tarea al presionar Enter
+          />
+          <ul className="list-group">
+            {tasks.length === 0 ? (
+              <li className="list-group-item text-center text-muted">
+                No hay tareas, añadir tareas
+              </li>
+            ) : (
+              tasks.map((task, index) => (
+                <li
+                  key={index}
+                  className="list-group-item d-flex justify-content-between align-items-center"
+                >
+                  {task}
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleDeleteTask(index)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+          <div className="mt-3 text-muted">
+            {tasks.length} item{tasks.length !== 1 ? 's' : ''} left
+          </div>
+        </div>
+      </div>
+    </div>
+	
+  );
 };
 
 export default Home;
