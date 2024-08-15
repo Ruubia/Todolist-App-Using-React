@@ -34,7 +34,7 @@ const Home = () => {
           <ul className="list-group">
             {tasks.length === 0 ? (
               <li className="list-group-item text-center text-muted">
-                No hay tareas, añadir tareas
+                No tasks, add tasks
               </li>
             ) : (
               tasks.map((task, index) => (
