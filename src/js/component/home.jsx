@@ -43,12 +43,11 @@ const Home = () => {
                   className="list-group-item d-flex justify-content-between align-items-center"
                 >
                   {task}
-                  <button
-                    className="btn btn-danger btn-sm"
+                  <spam
+                    className="deleteIcon mx-3 fz-1"
                     onClick={() => deleteTask(index)}
-                  >
-                    Delete
-                  </button>
+                  >x
+                  </spam>
                 </li>
               ))
             )}
